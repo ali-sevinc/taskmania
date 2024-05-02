@@ -9,10 +9,11 @@ import NoTask from "./NoTask";
 import Task from "./Task";
 
 export default function AllTasks() {
-  const users = useSelector((state: RootState) => state.user.users);
+  const loggedUser = useSelector((state: RootState) => state.user.users).find(
+    (user) => user.isLogin,
+  );
 
-  const loggedUser = users.find((user) => user.isLogin);
-
+  //if logged user has no task fallback page
   if (!loggedUser?.list.length) return <NoTask />;
 
   return (

@@ -5,9 +5,9 @@ import { RootState } from "../../store/store";
 
 export default function AppHeader() {
   const dispatch = useDispatch();
-  const users = useSelector((state: RootState) => state.user.users);
-
-  const loggedUser = users.find((user) => user.isLogin);
+  const loggedUser = useSelector((state: RootState) => state.user.users).find(
+    (user) => user.isLogin,
+  );
 
   return (
     <header className="fixed left-0 top-0 z-10 flex h-20 w-full items-center justify-between bg-slate-950 px-4">

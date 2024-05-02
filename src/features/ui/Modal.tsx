@@ -6,6 +6,7 @@ import {
   cloneElement,
 } from "react";
 import { createPortal } from "react-dom";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface InitialType {
   openName: string;
@@ -50,18 +51,23 @@ function Window({ children, name }: WindowType) {
   if (name !== openName) return null;
 
   return createPortal(
-    <div>
-      <div
-        onClick={close}
-        className="fixed left-0 top-0 z-20 min-h-screen w-full backdrop-blur-sm"
-      />
-      <dialog
-        className="inset-0 z-30 w-full max-w-2xl rounded-xl bg-slate-50 pb-8  sm:w-3/4"
-        open
-      >
-        {cloneElement(children, { onCloseModal: close })}
-      </dialog>
-    </div>,
+    <AnimatePresence>
+      <div>
+        <div
+          onClick={close}
+          className="fixed left-0 top-0 z-20 min-h-screen w-full backdrop-blur-sm"
+        />
+        <motion.dialog
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 100, opacity: 0 }}
+          className="inset-0 z-30 w-full max-w-2xl rounded-xl bg-slate-50 pb-8  sm:w-3/4"
+          open
+        >
+          {cloneElement(children, { onCloseModal: close })}
+        </motion.dialog>
+      </div>
+    </AnimatePresence>,
     document.body,
   );
 }

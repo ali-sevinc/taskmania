@@ -26,7 +26,11 @@ export default function TaskDetails() {
   return (
     <div>
       <div className="mx-4 mt-24 flex flex-col gap-4 rounded-xl bg-slate-100  pb-4 shadow-lg sm:mx-auto sm:w-3/4">
-        <h2 className="rounded-t-xl bg-slate-300 py-2 text-center text-4xl text-slate-800">
+        <h2
+          className={`rounded-t-xl bg-slate-300 py-2 text-center text-4xl ${
+            selectedTask.isComplete ? "text-green-600" : "text-slate-800 "
+          }`}
+        >
           {selectedTask.title}
         </h2>
 
@@ -66,7 +70,7 @@ export default function TaskDetails() {
           d
         </div>
 
-        <div className="mt-8 hidden items-center  justify-between px-12 text-slate-100 sm:flex">
+        <div className="mt-8 hidden items-center  justify-center gap-8 px-12 text-slate-100 sm:flex">
           <Button model="secondary" type="button" onClick={() => navigate(-1)}>
             &larr;Back
           </Button>

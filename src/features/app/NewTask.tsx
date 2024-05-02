@@ -1,7 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-
 import { RootState } from "../../store/store";
 import { addTask } from "../user/userSlice";
 import { Task } from "../../utils/types";
@@ -69,10 +68,12 @@ export default function NewTask({
       description: "",
     });
     setTags([]);
+    onCloseModal?.();
   }
 
   return (
     <div className="mx-auto mt-8  w-full max-w-2xl px-4 ">
+      {/* check if the user premium or not */}
       {!isPremium && loggedUser!.list.length > 4 ? (
         <PremiumTracker />
       ) : (

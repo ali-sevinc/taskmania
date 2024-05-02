@@ -94,7 +94,7 @@ export default function ModalAppSidebar() {
             </nav>
 
             <AddTagForm />
-            <UserTags />
+            <UserTags onClose={handleClose} />
           </aside>
         </>
       )}

@@ -1,12 +1,14 @@
+import { RootState } from "../../store/store";
 import Modal from "../ui/Modal";
 import NewTaskButton from "../ui/NewTaskButton";
 import NewTask from "./NewTask";
 import { list, grid } from "./uiSlice";
 import { HiOutlineViewList, HiOutlineViewGrid } from "react-icons/hi";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function DisplayMenu() {
+  const style = useSelector((state: RootState) => state.app.style);
   const dispatch = useDispatch();
 
   return (
@@ -19,16 +21,21 @@ export default function DisplayMenu() {
           <NewTask />
         </Modal.Window>
       </Modal>
-      <div className="flex items-center justify-center gap-1  text-sm ">
+
+      <div className="hidden items-center justify-center  gap-1 text-sm lg:flex">
         <h3>Display</h3>
         <button
-          className="rounded-full p-1 text-lg duration-200 hover:bg-slate-100 hover:text-slate-600"
+          className={`rounded-full p-1 text-lg duration-200 ${
+            style === "list" ? "bg-slate-100 text-slate-600" : ""
+          } hover:bg-slate-100 hover:text-slate-600`}
           onClick={() => dispatch(list())}
         >
           <HiOutlineViewList />
         </button>
         <button
-          className="rounded-full p-1 text-lg duration-200 hover:bg-slate-100 hover:text-slate-600"
+          className={`rounded-full p-1 text-lg duration-200 ${
+            style === "grid" ? "bg-slate-100 text-slate-600" : ""
+          } hover:bg-slate-100 hover:text-slate-600`}
           onClick={() => dispatch(grid())}
         >
           <HiOutlineViewGrid />
